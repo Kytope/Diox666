@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1 class="mb-4">Registro de Visitas</h1>
+  <a href="{% url 'visita_create' %}" class="btn btn-primary mb-3">Registrar Nueva Visita</a>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Visitante</th>
+        <th>Residente</th>
+        <th>Entrada</th>
+        <th>Salida</th>
+        <th>Duración</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for visita in visitas %}
+        <tr>
+          <td>{{ visita.visitante_nombre }}</td>
+          <td>{{ visita.residente.nombre }}</td>
+          <td>{{ visita.fecha_entrada }}</td>
+          <td>{{ visita.fecha_salida|default:"En curso" }}</td>
+          <td>
+            {% if visita.duracion %}
+              {{ visita.duracion }}
+            {% else %}
+              -
+            {% endif %}
+          </td>
+          <td>
+            {% if not visita.fecha_salida %}
+              <a href="{% url 'registrar_salida' visita.pk %}" class="btn btn-success btn-sm">Registrar Salida</a>
+            {% endif %}
+            <a href="{% url 'visita_delete' visita.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+          </td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="6">No hay visitas registradas.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

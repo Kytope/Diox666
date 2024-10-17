@@ -1,0 +1,57 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIOXX 666 - Gestión de Residentes</title>
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+    <style>
+        body {
+            padding-top: 5rem;
+            background-color: #f8f9fa;
+        }
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar-brand, .nav-link {
+            color: white !important;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'residente_list' %}">Residentes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'habitacion_list' %}">Habitaciones</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'medicamento_list' %}">Medicamentos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{% url 'visita_list' %}">Visitas</a>
+              </li>
+            </ul>
+          </div>
+    </nav>
+
+    <main class="container">
+        {% bootstrap_messages %}
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="container mt-5">
+        <hr>
+        <p class="text-center">&copy; 2024 DIOXX 666</p>
+    </footer>
+</body>
+</html>

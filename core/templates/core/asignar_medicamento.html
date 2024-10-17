@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1 class="mb-4">Asignar Medicamento a {{ residente.nombre }}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary">Asignar</button>
+      <a href="{% url 'residente_detail' residente.pk %}" class="btn btn-secondary">Cancelar</a>
+    {% endbuttons %}
+  </form>
+{% endblock %}

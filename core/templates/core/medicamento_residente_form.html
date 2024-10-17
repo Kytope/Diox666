@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1 class="mb-4">Editar Medicamento para {{ form.instance.residente.nombre }}</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% bootstrap_form form %}
+    {% buttons %}
+      <button type="submit" class="btn btn-primary">Guardar</button>
+      <a href="{% url 'residente_detail' form.instance.residente.pk %}" class="btn btn-secondary">Cancelar</a>
+    {% endbuttons %}
+  </form>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1 class="mb-4">Eliminar Residente</h1>
+  <div class="alert alert-danger">
+    <p>¿Estás seguro de que quieres eliminar a {{ residente.nombre }}?</p>
+  </div>
+  <form method="post">
+    {% csrf_token %}
+    {% buttons %}
+      <button type="submit" class="btn btn-danger">Confirmar</button>
+      <a href="{% url 'residente_list' %}" class="btn btn-secondary">Cancelar</a>
+    {% endbuttons %}
+  </form>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1 class="mb-4">Eliminar Registro de Visita</h1>
+  <p>¿Estás seguro de que quieres eliminar el registro de visita de {{ visita.visitante_nombre }} a {{ visita.residente.nombre }}?</p>
+  <form method="post">
+    {% csrf_token %}
+    {% buttons %}
+      <button type="submit" class="btn btn-danger">Confirmar</button>
+      <a href="{% url 'visita_list' %}" class="btn btn-secondary">Cancelar</a>
+    {% endbuttons %}
+  </form>
+{% endblock %}

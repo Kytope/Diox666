@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1 class="mb-4">Lista de Habitaciones</h1>
+  <a href="{% url 'habitacion_new' %}" class="btn btn-primary mb-3">Añadir Nueva Habitación</a>
+  
+  <div class="row">
+    {% for habitacion in habitaciones %}
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Habitación {{ habitacion.numero }}</h5>
+            <p class="card-text">Tipo: {{ habitacion.get_tipo_display }}</p>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <p class="alert alert-info">No hay habitaciones registradas.</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

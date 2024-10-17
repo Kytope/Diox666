@@ -1,0 +1,53 @@
+
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1 class="mb-4">Detalles del Residente</h1>
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">{{ residente.nombre }}</h5>
+      <p class="card-text"><strong>Fecha de Nacimiento:</strong> {{ residente.fecha_nacimiento }}</p>
+      <p class="card-text"><strong>Número de Identificación:</strong> {{ residente.numero_identificacion }}</p>
+      <p class="card-text"><strong>Contacto de Emergencia:</strong> {{ residente.contacto_emergencia }}</p>
+      <p class="card-text"><strong>Teléfono de Emergencia:</strong> {{ residente.telefono_emergencia }}</p>
+      <p class="card-text"><strong>Habitación:</strong> 
+        {% if residente.habitacion %}
+          {{ residente.habitacion }}
+        {% else %}
+          No asignada
+        {% endif %}
+      </p>
+    </div>
+  </div>
+
+  <h2 class="mb-3">Medicamentos</h2>
+  <a href="{% url 'asignar_medicamento' residente.pk %}" class="btn btn-primary mb-3">Asignar Medicamento</a>
+  
+  {% if residente.medicamentoresidente_set.all %}
+    <div class="row">
+      {% for medicamento_residente in residente.medicamentoresidente_set.all %}
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ medicamento_residente.medicamento.nombre }}</h5>
+              <p class="card-text">Dosis: {{ medicamento_residente.medicamento.dosis }}</p>
+              <p class="card-text">Frecuencia: {{ medicamento_residente.medicamento.frecuencia }}</p>
+              <p class="card-text">Instrucciones: {{ medicamento_residente.instrucciones }}</p>
+              <a href="{% url 'medicamento_residente_edit' medicamento_residente.pk %}" class="btn btn-warning btn-sm">Editar</a>
+              <a href="{% url 'medicamento_residente_delete' medicamento_residente.pk %}" class="btn btn-danger btn-sm">Eliminar</a>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="alert alert-info">No hay medicamentos asignados.</p>
+  {% endif %}
+
+  <div class="mt-4">
+    <a href="{% url 'residente_edit' residente.pk %}" class="btn btn-warning">Editar</a>
+    <a href="{% url 'residente_delete' residente.pk %}" class="btn btn-danger">Eliminar</a>
+    <a href="{% url 'residente_list' %}" class="btn btn-secondary">Volver a la lista</a>
+  </div>
+{% endblock %}

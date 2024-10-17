@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+  <h1 class="mb-4">Lista de Medicamentos</h1>
+  <a href="{% url 'medicamento_new' %}" class="btn btn-primary mb-3">Añadir Nuevo Medicamento</a>
+  
+  <div class="row">
+    {% for medicamento in medicamentos %}
+      <div class="col-md-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ medicamento.nombre }}</h5>
+            <p class="card-text">Dosis: {{ medicamento.dosis }}</p>
+            <p class="card-text">Frecuencia: {{ medicamento.frecuencia }}</p>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="col-12">
+        <p class="alert alert-info">No hay medicamentos registrados.</p>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
