@@ -42,7 +42,7 @@ Sistema de gestión integral diseñado específicamente para hogares de reposo y
 
 1. Clonar el repositorio:
 ```bash
-git clone https://github.com/tuusuario/dioxx666.git
+git clone https://github.com/Kytope/dioxx666.git
 cd dioxx666
 ```
 2. Instalar las dependencias:
